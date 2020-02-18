@@ -88,7 +88,7 @@ resource "google_compute_instance" "enterprise" {
   }
 
   metadata = {
-    sshKeys = "neil:${file("id_rsa.pub")}"
+    sshKeys = "mydeployuser:${file("mydeployuser.pub")}"
   }
 
  metadata_startup_script = "sudo yum install httpd -y;sudo hostnamectl set-hostname enterprise1.erich.com;useradd -d /home/mydeployuser mydeployuser"
@@ -118,7 +118,7 @@ resource "google_compute_instance" "target" {
   }
 
   metadata = {
-    sshKeys = "neil:${file("id_rsa.pub")}"
+    sshKeys = "mydeployuser:${file("mydeployuser.pub")}"
   }
 
   provisioner "file" {
@@ -130,7 +130,7 @@ resource "google_compute_instance" "target" {
       host        = self.network_interface[0].access_config[0].nat_ip
       user        = "neil"
       timeout     = "500s"
-      private_key = "${file("~/.ssh/id_rsa")}"
+      private_key = "${file("~/.ssh/mydeployuser")}"
 
   }
 }
