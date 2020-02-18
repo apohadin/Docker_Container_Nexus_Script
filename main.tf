@@ -1,6 +1,6 @@
 provider "google" {
-  credentials = file("bionic-aspect-267312-ab0fb5ca396a.json")
-  project     = "bionic-aspect-267312"
+  credentials = file("myproject.json")
+  project     = "My Project"
   region      = "europe-west2"
   zone 	      = "europe-west2-a"
 }
