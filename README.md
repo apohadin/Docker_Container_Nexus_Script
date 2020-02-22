@@ -4,9 +4,10 @@ Docker Container Nexus Script up and down
 Note: Edit to allow instance in network to have access http external(public network).
 
 
-execute below command to get  Admin password:
+# execute below command to get  Admin password:
 
 docker exec -it CONTAINDER_NAME /bin/bash -c "cat  /nexus-data/admin.password"
+
 # Remove stopped containers and untagged images
 
 $./mrclean.sh --reset
