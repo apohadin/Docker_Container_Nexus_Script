@@ -7,19 +7,19 @@ Note: Edit to allow instance in network to have access http external(public netw
 execute below command to get  Admin password:
 
 docker exec -it CONTAINDER_NAME /bin/bash -c "cat  /nexus-data/admin.password"
-# remove stopped containers and untagged images
+# Remove stopped containers and untagged images
 
 $./mrclean.sh --reset
 
-# remove containers|images|tags matching {repository|image|repository\image|tag|image:tag}
+# Remove containers|images|tags matching {repository|image|repository\image|tag|image:tag}
 
 $ ./mrclean.sh --purge {image}
 
-# remove everything
+# Remove everything
 
 $ ./mrclean.sh --nuclear
 
-# backup image
+# Backup image
 $./mrclean.sh --backup
 
 # Save to tar to migrate to other servers/instances
