@@ -9,7 +9,7 @@
 # pattern and untagged images
 #   $ mrclean --purge {image}
 # everything
-#   $ mrclean --nuclear
+#  $ mrclean --nuclear
 
 
 if [ "$1" == "--reset" ]; then
