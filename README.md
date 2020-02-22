@@ -11,7 +11,7 @@ docker exec -it CONTAINDER_NAME /bin/bash -c "cat  /nexus-data/admin.password"
 
 $./mrclean.sh --reset
 
-#remove containers|images|tags matching {repository|image|repository\image|tag|image:tag}
+# remove containers|images|tags matching {repository|image|repository\image|tag|image:tag}
 
 $ ./mrclean.sh --purge {image}
 
