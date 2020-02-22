@@ -48,7 +48,7 @@ if [ "$1" == "--backup" ];then
     echo "Usage: ./mrclean.sh --backup"
     echo "Enter Container Backupname:"
     read container_id backup
-    docker commit -p {$container_id} {$backup} 2>/dev/null || echo "Snapshot has been created...."
+    docker commit -p $container_id $backup 2>/dev/null || echo "Snapshot has been created...."
 fi
 
 if [ "$1" == "--savetofile" ];then
