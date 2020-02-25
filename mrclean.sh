@@ -51,7 +51,7 @@ if [ "$1" == "--backup" ];then
     docker save $2 > $2.tar
     exit 0
 else
-    echo "Usage: ./mrclean.sh --backup container-id backupname"
+    echo "Usage: ./mrclean.sh --backup backupname"
 fi
 
 if [ "$1" == "--restore" ];then
