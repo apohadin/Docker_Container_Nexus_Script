@@ -6,7 +6,7 @@ Note: Edit to allow instance in network to have access http external(public netw
 
 # execute below command to get  Admin password:
 
-docker exec -it CONTAINDER_NAME /bin/bash -c "cat  /nexus-data/admin.password"
+docker exec -it $(docker ps -qa) /bin/bash -c "cat  /nexus-data/admin.password"
 
 # Remove stopped containers and untagged images
 
