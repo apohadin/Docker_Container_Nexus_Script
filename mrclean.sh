@@ -61,5 +61,13 @@ else
   echo "Usage: ./mrclean.sh --restore backupname.tar"
 fi
 
+if [ "$1" == "--createfrombackup" ];then
+    docker volume create --name nexus-data 2>/dev/null
+    docker  run --name $2 -d -p $3 -v nexus-data:/nexus-data $4 2>/dev/null|| echo "Creating docker image nexus3"
+    exit 0
+else
+    $(docker ps -a|grep $2 |awk '{print $13}') 2>/dev/null || echo "Container has already been created.."
+    Usage: ./mrclean.sh --createfrombackup cont-name port backupname
+fi
 
 exit 0
