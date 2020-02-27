@@ -11,6 +11,30 @@
 # everything
 #   $ mrclean --nuclear
 
+if [ "$1" == "--backup" ];then
+    docker commit -p $(docker ps -aq) $2 || echo "Snapshot has been created...."
+    docker save $2 > $2.tar
+    exit 0
+else
+    echo "Usage: ./mrclean.sh --backup backupname"
+fi
+
+if [ "$1" == "--create" ];then
+    docker volume create --name nexus-data 2>/dev/null
+    docker  run --name $2 -d -p $3 -v nexus-data:/nexus-data backup 2>/dev/null|| echo "Creating docker image nexus3"
+    exit 0
+else
+    $(docker ps -a|grep $2 |awk '{print $13}') 2>/dev/null || echo "Container has already been created.."
+fi
+
+if [ "$1" == "--frombackup" ];then
+    docker volume create --name nexus-data 2>/dev/null
+    docker  run --name $2 -d -p 8081:8081 -v nexus-data:/nexus-data $(docker images|grep -v 'sonatype/nexus3'|grep -v 'REPOSITORY'|awk '{print $1}') 2>/dev/null|| echo "Creating docker image nexus3"
+    exit 0
+else
+    $(docker ps -a|grep $2 |awk '{print $13}') 2>/dev/null || echo "Container has already been created.."
+    Usage: ./mrclean.sh --frombackup cont-name
+fi
 
 if [ "$1" == "--reset" ]; then
     # Remove all containers regardless of state
@@ -37,21 +61,12 @@ else
     docker rmi $(docker images | grep "<none>" | awk '{print $3}') 2>/dev/null || echo "No untagged images to delete."
 fi
 
-
-if [ "$1" == "--create" ];then
-    docker volume create --name nexus-data 2>/dev/null
-    docker  run --name $2 -d -p $3 -v nexus-data:/nexus-data sonatype/nexus3 2>/dev/null|| echo "Creating docker image nexus3"
-    exit 0
-else
-    $(docker ps -a|grep $2 |awk '{print $13}') 2>/dev/null || echo "Container has already been created.."
-fi
-
 if [ "$1" == "--backup" ];then
     docker commit -p $(docker ps -aq) $2 || echo "Snapshot has been created...."
     docker save $2 > $2.tar
     exit 0
 else
-    echo "Usage: ./mrclean.sh --backup backupname"
+    echo "Usage: ./mrclean.sh --backup container-id backupname"
 fi
 
 if [ "$1" == "--restore" ];then
@@ -60,14 +75,3 @@ if [ "$1" == "--restore" ];then
 else
   echo "Usage: ./mrclean.sh --restore backupname.tar"
 fi
-
-if [ "$1" == "--createfrombackup" ];then
-    docker volume create --name nexus-data 2>/dev/null
-    docker  run --name $2 -d -p $3 -v nexus-data:/nexus-data $4 2>/dev/null|| echo "Creating docker image nexus3"
-    exit 0
-else
-    $(docker ps -a|grep $2 |awk '{print $13}') 2>/dev/null || echo "Container has already been created.."
-    Usage: ./mrclean.sh --createfrombackup cont-name port backupname
-fi
-
-exit 0
