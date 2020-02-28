@@ -14,17 +14,10 @@ $./mrclean.sh --reset
 
 # Remove containers|images|tags matching {repository|image|repository\image|tag|image:tag}
 
-$ ./mrclean.sh --purge {image}
-
-# Remove everything
-
-$ ./mrclean.sh --nuclear
+$ ./mrclean.sh --purge 
 
 # Backup image
-$./mrclean.sh --backup
-
-# Save to tar to migrate to other servers/instances
-$./mrclean.sh --savetofile
+$./mrclean.sh --backup name
 
 # Restore image 
-$./mrclean.sh --restore
+$./mrclean.sh --restore backup.tar
