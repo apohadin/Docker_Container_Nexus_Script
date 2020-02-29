@@ -29,7 +29,8 @@ sudo bash mrclean.sh --create MYNEXUS 8081:8081 --> note wait for a while for it
 go to http://104.197.82.250:8081/ to check if nexus is already setup
 sudo bash mrclean.sh --backup --> note: will be generating 2 files {image}.tar and {config}`date +%d%m%y`.tar
 # Steps to restore
-Note: Please create a container nexus first to execute this
+Note: Please make sure nexus-data volume is present
+sudo docker volume ls
 
 sudo bash mrclean.sh --restore {image}.tar 
 
