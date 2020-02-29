@@ -27,8 +27,8 @@ if [ "$1" == "--backup" ];then
     docker commit -p $(sudo docker ps -aq) $2 || echo "Snapshot has been created...."
     #docker stop $(sudo docker ps -aq)
     docker save $2 > $2.tar
-    sudo tar -cvf /var/lib/docker/volumes/nexus-data/_data/backup`date +%d%m%y`.tar /var/lib/docker/volumes/nexus-data/_data/
-    #sudo -s mv /var/lib/docker/volumes/nexus-data/_data/backup`date +%d%m%y`.tar .
+    sudo -s cd /var/lib/docker/volumes/nexus-data/;sudo tar -cvf backup`date +%d%m%y`.tar _data/
+    sudo -s mv /var/lib/docker/volumes/nexus-data/backup`date +%d%m%y`.tar .
     exit 0
 else
     echo "Usage: ./mrclean.sh --backup backupname"
@@ -36,7 +36,8 @@ fi
 
 if [ "$1" == "--restore" ];then
     cat $2 |docker load  2>/dev/null|| echo "Image loading ...."
-    sudo tar xvf backup`date +%d%m%y`.tar -C /var/lib/docker/volumes/nexus-data/_data/ 
+    sudo tar xvf backup`date +%d%m%y`.tar -C /var/lib/docker/volumes/nexus-data/_data/
+    sudo mv /var/lib/docker/volumes/nexus-data/_data/var/lib/docker/volumes/nexus-data/_data/* /var/lib/docker/volumes/nexus-data/_data/
   exit 0
 fi
 
