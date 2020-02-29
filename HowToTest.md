@@ -28,41 +28,22 @@ sudo install-docker.sh
 sudo bash mrclean.sh --create MYNEXUS 8081:8081 --> note wait for a while for it to setup ..
 go to http://104.197.82.250:8081/ to check if nexus is already setup
 sudo bash mrclean.sh --backup --> note: will be generating 2 files {image}.tar and {config}`date +%d%m%y`.tar
-sudo bash mrclean.sh --restore backupname.tar 
+# Steps to restore
+Note: Please create a container nexus first to execute this
+
+sudo bash mrclean.sh --restore {image}.tar 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-sudo bash mrclean.sh restore backup.tar
-sudo bash mrclean.sh --restore backup.tar
 x=$(sudo docker images | grep none | cut -d '>' -f3 | cut -d \t -f1)
 y=$(echo $x | cut -d" " -f1)
 sudo docker run --name sample -d -p 8081:8081 -v nexus-data:/nexus-data -t $y
 
-
-
-
-
 x=$(sudo docker images | grep none | cut -d '>' -f3 | cut -d \t -f1)
 y=$(echo $x | cut -d" " -f1)
 sudo docker exec -it $y /bin/bash -c "cat  /nexus-data/admin.password"
-
-
-
 sudo docker run --name sample -d -p 8081:8081 -v nexus-data:/nexus-data -t $y
 
 
