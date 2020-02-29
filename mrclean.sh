@@ -25,9 +25,9 @@ fi
 
 if [ "$1" == "--backup" ];then
     docker commit -p $(sudo docker ps -aq) $2 || echo "Snapshot has been created...."
-    docker stop $(sudo docker ps -aq)
+    #docker stop $(sudo docker ps -aq)
     docker save $2 > $2.tar
-    sudo -s cd /var/lib/docker/volumes/nexus-data/_data/;sudo tar cvf backup`date +%d%m%y`.tar .
+    sudo tar -cvf /var/lib/docker/volumes/nexus-data/_data/backup`date +%d%m%y`.tar /var/lib/docker/volumes/nexus-data/_data/
     #sudo -s mv /var/lib/docker/volumes/nexus-data/_data/backup`date +%d%m%y`.tar .
     exit 0
 else
