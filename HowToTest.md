@@ -25,7 +25,9 @@ scp -i ~/.ssh/mydeployuser mrclean.sh ej@35.193.199.57:~
 
 # Steps on the new server 
 sudo install-docker.sh
-sudo bash mrclean.sh --create MYNEXUS 8081:8081
+sudo bash mrclean.sh --create MYNEXUS 8081:8081 --> note wait for a while for it to setup ..
+go to http://104.197.82.250:8081/ to check if nexus is already setup
+sudo bash mrclean.sh --backup --> note: will be generating 2 files {image}.tar and {config}`date +%d%m%y`.tar
 sudo bash mrclean.sh --restore backupname.tar 
 
 
