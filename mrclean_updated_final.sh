@@ -28,7 +28,6 @@ if [ "$1" == "--backup" ];then
     docker save $2 > $2.tar
     sudo tar cvf /var/lib/docker/volumes/nexus-data/backup`date +%d%m%y`.tar /var/lib/docker/volumes/nexus-data/_data
     sudo mv /var/lib/docker/volumes/nexus-data/backup`date +%d%m%y`.tar .
-    #sudo  mv /var/lib/docker/volumes/nexus-da/var/lib/docker/volumes/nexus-data/ta/_data/* /var/lib/docker/volumes/nexus-data/_data
     exit 0
 else
     echo "Usage: ./mrclean.sh --backup backupname"
@@ -37,7 +36,7 @@ fi
 if [ "$1" == "--restore" ];then
     docker volume create --name nexus-data 
     cat $2 |docker load  2>/dev/null|| echo "Image loading ...."
-    sudo tar xvf backup`date +%d%m%y`.tar -C /var/lib/docker/volumes/nexus-data/_data/ 
+    sudo tar xvf $3 -C /var/lib/docker/volumes/nexus-data/_data/ 
     sudo  mv /var/lib/docker/volumes/nexus-data/_data/var/lib/docker/volumes/nexus-data/_data/* /var/lib/docker/volumes/nexus-data/_data
   exit 0
 fi
