@@ -33,7 +33,7 @@ sudo bash mrclean.sh --backup --> note: will be generating 2 files {image}.tar a
 Note: Please make sure nexus-data volume is present
 sudo docker volume ls
 
-sudo bash mrclean.sh --restore {image}.tar 
+sudo bash mrclean.sh --restore {image}.tar {config}`date +%d%m%y`.tar
 
 
 
