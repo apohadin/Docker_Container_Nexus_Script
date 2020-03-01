@@ -26,8 +26,8 @@ fi
 if [ "$1" == "--backup" ];then
     docker commit -p $(sudo docker ps -aq) $2 || echo "Snapshot has been created...."
     docker save $2 > $2.tar
-    sudo tar cvf /var/lib/docker/volumes/nexus-data/backup`date +%d%m%y`.tar /var/lib/docker/volumes/nexus-data/_data
-    sudo mv /var/lib/docker/volumes/nexus-data/backup`date +%d%m%y`.tar .
+    sudo tar cvf /var/lib/docker/volumes/nexus-data/backupconfig.tar /var/lib/docker/volumes/nexus-data/_data
+    sudo mv /var/lib/docker/volumes/nexus-data/backupconfig.tar .
     exit 0
 else
     echo "Usage: ./mrclean.sh --backup backupname"
